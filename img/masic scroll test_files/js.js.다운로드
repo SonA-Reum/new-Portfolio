@@ -1,0 +1,335 @@
+ // ==============================================================
+// gnb 
+// ===============================================================
+
+let moGnb =  document.querySelector('.open_ham').nextElementSibling;
+
+// 햄버거 메뉴 열 때 
+document.querySelector('.open_ham').addEventListener("click", function(){
+moGnb.classList.toggle("active");
+
+
+    if (moGnb.style.maxWidth) {
+        panel.style.maxWidth = null;
+        document.body.style.overflowY = 'scroll';
+      } else {
+        moGnb.style.maxWidth = "50%";
+        document.body.style.overflowY = 'hidden';
+         //메뉴 닫으면 배경 흐림 효과 넣기
+        document.querySelector('.mo_gnb').classList.toggle('active');
+        
+      }
+
+});
+
+// 햄버거 메뉴 닫을 때  
+document.querySelector('.close_ham').addEventListener("click", function(){
+    //body overflow-y scroll 되게
+    document.body.style.overflowY = 'scroll';
+    //메뉴 슬라이드
+    document.querySelector('.close_ham').parentElement.classList.toggle("active");
+    moGnb.style.maxWidth = null;
+    //메뉴 닫으면 배경 흐림 효과 없애기
+    document.querySelector('.mo_gnb').classList.toggle('active');
+});
+
+//gnb 스크롤 이벤트
+
+window.addEventListener("scroll", function(){
+    let scroll = window.pageYOffset;
+    if(scroll > 400) {
+        document.querySelector('.gnb_wrap').style.backgroundColor = 'var(--color-white)';
+        document.querySelector('.resume').style.visibility = 'visible';
+    } else {
+        document.querySelector('.gnb_wrap').style.backgroundColor = 'var(--color-white)';
+        document.querySelector('.resume').style.visibility = 'hidden';
+    }
+});
+
+// ==============================================================
+// 두번째 섹션
+// ==============================================================
+
+
+//버튼 클릭시 효과
+var numParent = document.querySelector('.profile-num')
+var numChild = numParent.getElementsByClassName("numBtn");
+//컨텐츠 부모
+let contItem = document.querySelector('.cont-right').children;
+
+for (var i = 0; i < numChild.length; i++) {
+  numChild[i].addEventListener("click", function(){
+    //active 클래스를 추가하기
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+
+    //해당 콘텐츠  display: block
+    if (this.id == "pfofile01") {
+      contItem.item(0).style.display = 'flex';
+      contItem.item(1).style.display = 'none';
+      contItem.item(2).style.display = 'none';
+    } else if (this.id == "pfofile02") {
+      contItem.item(0).style.display = 'none';
+      contItem.item(1).style.display = 'flex';
+      contItem.item(2).style.display = 'none';
+    } else if (this.id == "pfofile03") {
+      contItem.item(0).style.display = 'none';
+      contItem.item(1).style.display = 'none';
+      contItem.item(2).style.display = 'flex';
+    }     
+  });
+}
+
+//타블렛 사이즈 부터 버튼에 숫자 대신 분류
+window.onload = function(){
+  var innerWidth = window.innerWidth;
+  if (innerWidth > 1024) {
+    document.getElementById("pfofile01").innerHTML = '1';
+    document.getElementById("pfofile02").innerHTML = '2';
+    document.getElementById("pfofile03").innerHTML = '3';
+  } else if (innerWidth < 1024) {
+    document.getElementById("pfofile01").innerHTML = 'Skill';
+    document.getElementById("pfofile02").innerHTML = 'Iam';
+    document.getElementById("pfofile03").innerHTML = 'History';
+  }
+}
+window.onresize = function(event){
+  var innerWidth = window.innerWidth;
+  if (innerWidth > 1024) {
+    document.getElementById("pfofile01").innerHTML = '1';
+    document.getElementById("pfofile02").innerHTML = '2';
+    document.getElementById("pfofile03").innerHTML = '3';
+  } else if (innerWidth < 1024) {
+    document.getElementById("pfofile01").innerHTML = 'Skill';
+    document.getElementById("pfofile02").innerHTML = 'Iam';
+    document.getElementById("pfofile03").innerHTML = 'History';
+  }
+}
+
+
+
+// var windowWidth = $( window ).width();
+// $( window ).resize(function() {
+//   //창크기 변화 감지
+//   if(windowWidth < 1024) {
+//     //창 가로 크기가 1024 미만일 경우 
+//     //버튼 안의 텍스트를 지우고
+      
+//     }
+//  }
+// });
+
+
+
+
+// ==============================================================
+// section03 게시판 필터
+// ==============================================================
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("fliterItem");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    removeClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) addClass(x[i], "show");
+  }
+}
+
+function addClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function removeClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);     
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("filterActive");
+    console.log(current);
+    current[0].className = current[0].className.replace(" filterActive", "");
+    this.className += " filterActive";
+  });
+}
+
+
+
+
+/*
+기본 동작 원리
+1. ScrollMagic 컨트롤러 생성
+2. animation object 생성
+3. Scene object 생성
+4. 2번을 3번에 추가
+5. 1번(controller)을 3번에 추가
+*/
+
+
+
+
+
+// // ==============================================================
+// // 로딩 후 첫 circle 애니메이션
+// // ==============================================================
+// //컨트롤러 생성
+// var controllerMain = new ScrollMagic.Controller({});
+// //애니메이션 오브젝트
+// var tween02 = TweenMax.to('#animation02', 2, {
+//     opacity: '1'
+// }); 
+// //scene 오브젝트 
+// var sceneMain = new ScrollMagic.Scene({
+//     triggerElement: '#trigger01',
+//     triggerHook : '0.1',
+//     duration: '450%',
+// })
+// .setPin('#animation01')
+// .setTween(tween02)
+// .addTo(controllerMain)
+// .addIndicators({
+//     name: "1pin"
+// });
+
+// // ==============================================================
+// // 나무 애니메이션
+
+
+
+// // ==============================================================
+// //애니메이션 오브젝트
+// var tween03 = TweenMax.to('#animation03', 1, {
+//     opacity: '1' 
+// }); 
+// var tween04 = TweenMax.to('#animation04', 1, {
+//     opacity: '1'
+// }); 
+// var tween05 = TweenMax.to('#animation05', 0.5, {
+//     opacity: '1'
+// }); 
+// //scene 오브젝트 
+// var sceneTree01 = new ScrollMagic.Scene({
+//     triggerElement: '#animation01',
+//     triggerHook : '0',
+// })
+// .setClassToggle('#animation03', 'hatch')
+// .setTween(tween03)
+// .addTo(controllerMain)
+// // .addIndicators({
+// //     name: "나무1"
+// // })
+
+// var sceneTree02 = new ScrollMagic.Scene({
+//     triggerElement: '#animation01',
+//     triggerHook : '0',
+// })
+// .setClassToggle('#animation04', 'hatch')
+// .setTween(tween04)
+// .addTo(controllerMain)
+// // .addIndicators({
+// //     name: "나무2"
+// // })
+// var sceneBigTree = new ScrollMagic.Scene({
+//     triggerElement: '#animation01',
+//     triggerHook : '0',
+// })
+// .setClassToggle('#animation05', 'slideUp')
+// .setTween(tween05)
+// .addTo(controllerMain)
+// // .addIndicators({
+// //     name: "큰나무"
+// // })
+
+// // ==============================================================
+// // 글자 애니메이션 (첫화면)
+// // ==============================================================
+// var controllerMain = new ScrollMagic.Controller({
+
+// });
+
+
+// //연달아서 애니메이션 시키기
+
+// var textAnimation = new TimelineMax()
+// .fromTo(".txt01", 1, {opacity:"0"}, {opacity:"1"}) 
+// .to(".txt01", 1, {opacity:"0"})
+// .fromTo(".txt02", 1, {opacity:"0"}, {opacity:"1"}) 
+// .to(".txt02", 1, {opacity:"0"})
+// .fromTo(".txt03", 1, {opacity:"0"}, {opacity:"1"}) 
+// .to(".txt03", 1, {opacity:"0"})
+
+
+// var scenetext = new ScrollMagic.Scene({
+//     triggerElement: '#animation01',
+//     triggerHook : '0',
+//     duration: '400%'
+// })
+// .setTween(textAnimation)
+// .addTo(controllerMain)
+// // .addIndicators({
+// //     name: "텍스트1"
+// // })
+
+// //==============================================================
+// //  나무 순서대로 사라지게 하기	
+// // ==============================================================
+
+
+// var tweenStagger = TweenMax.staggerFromTo('.circle > img', 0.4,
+//   {
+//     opacity: 1,
+//   },
+//   {
+//     opacity: 0,
+//   },
+//   0.3
+// );
+// var scene05 = new ScrollMagic.Scene({
+//     triggerElement: '#trigger02',
+//     duration: '50%',
+//     triggerHook : '1'
+//   })
+//   .setTween(tweenStagger)
+//   .addTo(controllerMain)
+// //   .addIndicators({
+// //     name: "나무 사라지자"
+// //   });
+
+
+
+
+//   var tween06 = TweenMax.fromTo('.text_box02', 2, 
+//   {opacity: '0'},{opacity: '1'}
+//   ); 
+
+//   var scene06 = new ScrollMagic.Scene({
+//     triggerElement: '#trigger02',
+//     duration: '150%',
+//     triggerHook : '0'
+//   })
+//   .setTween(tween06)
+//   .addTo(controllerMain)
+//   .addIndicators({
+//     name: "글자 애니메이션"
+//   });
+
+
+

@@ -1,0 +1,52 @@
+.section03 {
+    border: 1px solid blue;
+}
+.section03 .sizer {
+    padding-bottom: 100vh;
+}
+.section03 .filter {
+    width: 100%;
+}
+.section03 .content {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border: 1px solid yellow;
+}
+
+/* 필터 버튼 */
+.section03 .filter  {
+    width: 100%;
+}
+.filter .btn {
+    padding: 6px 10px;
+    border-radius: 16px;
+    color: var(--color-black3);
+    cursor: pointer;
+}
+.filter .btn.active {
+    background-color: var(--color-point);
+    color: var(--color-white);
+    font-weight: 700;
+}
+/* 필터 내용 */
+.section03 .filter-cont {
+    width: 100%;
+}
+.section03 .filter-cont .fliterItem {
+    width: 280px;
+    height: 168px;
+    border: 1px solid red;
+    float: left;
+    display: none;
+}
+.section03 .filter-cont .fliterItem::after {
+    content: '';
+    clear: both;
+}
+
+.section03 .row .fliterItem.show {
+    display: block;
+  }
