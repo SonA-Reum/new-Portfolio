@@ -69,11 +69,7 @@ if (compStyles.getPropertyValue('display') == 'flex') {
      
       // console.log('지금 클릭한 인덱스는 ' + gnbMove[index]);
       //loacation 변수에 클릭한 메뉴의 인덱스와 일치하는 섹션의 offsetTop값을 넣어준 후
-      if (compStyles.getPropertyValue('display') == 'flex') {
-        goLocation = document.querySelector("#trigger0"+[index]).offsetTop;
-      } else if ((compStyles.getPropertyValue('display') == 'none')) {
-        goLocation = document.querySelector("#trigger0"+[index + 1]).offsetTop;
-      }
+      goLocation = document.querySelector("#trigger0"+[index + 1]).offsetTop;
      
       // console.log(goLocation);
       // 이동한다.
