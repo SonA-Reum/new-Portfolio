@@ -49,10 +49,11 @@ window.addEventListener("scroll", function(){
 //gnb 클릭했을 때 이동 이벤트
 let gnbMove;
 let compStyles = window.getComputedStyle(document.querySelector(".pc_gnb"));
+let goLocation;
 
 if (compStyles.getPropertyValue('display') == 'flex') {
   // pc_gnb가 block이면,gnbMove에 pc 메뉴를 담고
-  gnbMove = document.querySelectorAll('.gnb a');
+  gnbMove = document.querySelectorAll('.gnb > li > a');
   //pc_gnb가 none이면 (=햄버거 메뉴가 block일 때)
 } else if (compStyles.getPropertyValue('display') == 'none') {
   //gnbMove에 모바일 메뉴를 담는다.
@@ -61,22 +62,26 @@ if (compStyles.getPropertyValue('display') == 'flex') {
 
   //메뉴마다 클릭 이벤트를 달아준다.
   gnbMove.forEach(function (el, index){
+    console.log(gnbMove);
     gnbMove[index].addEventListener("click", function(event){
+      
       event.preventDefault();
+     
       // console.log('지금 클릭한 인덱스는 ' + gnbMove[index]);
       //loacation 변수에 클릭한 메뉴의 인덱스와 일치하는 섹션의 offsetTop값을 넣어준 후
       if (compStyles.getPropertyValue('display') == 'flex') {
-        var location = document.querySelector("#trigger0"+[index]).offsetTop;
+        goLocation = document.querySelector("#trigger0"+[index]).offsetTop;
       } else if ((compStyles.getPropertyValue('display') == 'none')) {
-        var location = document.querySelector("#trigger0"+[index + 1]).offsetTop;
+        goLocation = document.querySelector("#trigger0"+[index + 1]).offsetTop;
       }
      
-      // console.log(location);
-      //그곳으로 부드럽게 이동한다.
-      window.scrollTo({top: location, left:0, behavior:'smooth'});
+      // console.log(goLocation);
+      // 이동한다.
+      window.scrollTo({top: goLocation, left:0, behavior:'smooth'});
       document.querySelector('.mo_gnb ol').classList.remove('active');
 
     });
+
   });
 
 
@@ -298,7 +303,7 @@ gnbTarget.forEach(function (el, index) {
     .to(gnbTarget[index], 4, {
     color: "#5470F8"
     })
-    console.log(index);
+    // console.log(index);
     var scene2 = new ScrollMagic.Scene({
     triggerElement: sectionTrigger[index],
     triggerHook: 0.5,
@@ -686,7 +691,7 @@ var scenesection03Target = new ScrollMagic.Scene({
   })
   .setTween(tweenStaggerTxt)
   .addTo(controllersection01)
-  .addIndicators({name:"시작"})
+  // .addIndicators({name:"시작"})
 //2. 아코디언 메뉴 버튼 클릭 했을 때 텍스트 애니메이션
 
 let btnTxt = document.querySelectorAll('.numBtn');
@@ -780,6 +785,9 @@ function fncFilterBtn() {
 
 };
 
+document.querySelector('.resume').addEventListener('click', function(){
+   console.log('클릭');
+});
 
 
 
